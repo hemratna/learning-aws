@@ -17,14 +17,15 @@ Resources:
 
   EC2Instance:
     Type: AWS::EC2::Instance
-    ImageId: ami-03fa4afc89e4a8a09
-    InstanceType: !Ref InstanceType
+    Properties:
+      ImageId: ami-0a8b4cd432b1c3063
+      InstanceType: !Ref InstanceType
 
 Outputs:
 
   EC2InstanceIP:
     Description: IP Address of EC2 Instance create by this Coludformation stack.
-    Value: !GetAtt EC2Instance.PublicIP
+    Value: !GetAtt EC2Instance.PublicIp
 
   EC2InstanceAvailabilityZone:
     Description: AvailabilityZone of EC2 Instance create by this Coludformation stack.
