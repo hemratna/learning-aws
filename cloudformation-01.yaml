@@ -1,0 +1,31 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Description:
+  Learning basic of CloudFormation.
+  This stack will create EC2 Instance.
+
+Parameters:
+
+  InstanceType:
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t2.micro
+      - t2.small
+
+Resources:
+
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    ImageId: ami-03fa4afc89e4a8a09
+    InstanceType: !Ref InstanceType
+
+Outputs:
+
+  EC2InstanceIP:
+    Description: IP Address of EC2 Instance create by this Coludformation stack.
+    Value: !GetAtt EC2Instance.PublicIP
+
+  EC2InstanceAvailabilityZone:
+    Description: AvailabilityZone of EC2 Instance create by this Coludformation stack.
+    Value: !GetAtt EC2Instance.AvailabilityZone
