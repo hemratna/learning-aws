@@ -13,6 +13,15 @@ Parameters:
       - t2.micro
       - t2.small
 
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+
+  Subnet:
+    Type: 'AWS::EC2::Subnet::Id'
+
+  KeyPair:
+    Type: AWS::EC2::KeyPair::KeyName
+
 Resources:
 
   EC2Instance:
@@ -20,8 +29,29 @@ Resources:
     Properties:
       ImageId: ami-0a8b4cd432b1c3063
       InstanceType: !Ref InstanceType
+      SecurityGroups: !Ref SecurityGroup
+      KeyName: !Ref KeyPair
+
+  SecurityGroup:
+    Type: "AWS::EC2::SecurityGroup"
+    Properties:
+      GroupDescription: !Sub ${AWS::StackName}-SecurityGroup
+      SecurityGroupIngress:
+        - CidrIp: "0.0.0.0/0"
+          IpProtocol: "TCP"
+          FromPort: 80
+          ToPort: 80
+      SecurityGroupEgress:
+        - CidrIp: "0.0.0.0/0"
+          IpProtocol: "TCP"
+          FromPort: 80
+          ToPort: 80
+      VpcId: !Ref VpcId
 
 Outputs:
+
+  SecurityGroupId:
+    Value: !GetAtt SecurityGroup.GroupId
 
   EC2InstanceIP:
     Description: IP Address of EC2 Instance create by this Coludformation stack.
