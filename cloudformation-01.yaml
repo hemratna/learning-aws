@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: 2010-09-09
 
 Description:
-  Learning basic of CloudFormation....
+  Learning basic of CloudFormation. In main
   This stack will create EC2 Instance.
 
 Parameters:
